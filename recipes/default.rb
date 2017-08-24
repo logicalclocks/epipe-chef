@@ -79,12 +79,12 @@ if node.epipe.systemd == "true"
 if node.services.enabled == "true"
     notifies :enable, resources(:service => service_name)
 end
-    notifies :start, resources(:service => service_name), :immediately
+    notifies :restart, resources(:service => service_name)
   end
 
-  hops_start "reload_epipe_daemon" do
+  kagent_config "#{service_name}" do
     action :systemd_reload
-  end  
+  end
 
 else #sysv
 
