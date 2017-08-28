@@ -41,10 +41,11 @@ bash 'extract_epipe' do
         code <<-EOH
                 if [ ! -d #{node.epipe.dir} ] ; then
                    mkdir -p #{node.epipe.dir}
-                   chown -R #{node.epipe.user}:#{node.epipe.group} #{node.epipe.dir}
+                   chmod 755 #{node.epipe.dir} 
                 fi
                 tar -xf #{cached_package_filename} -C #{node.epipe.dir}
                 chown -R #{node.epipe.user}:#{node.epipe.group} #{node.epipe.home}
+                chmod 750 #{node.epipe.home}
                 cd #{node.epipe.home}
                 touch #{epipe_downloaded}
                 chown #{node.epipe.user} #{epipe_downloaded}
