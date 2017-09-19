@@ -22,6 +22,14 @@ end
 
 include_recipe "java"
 
+# ePipe requires libcurl.so.4
+case node['platform']
+when 'ubuntu'
+  package 'libcurl4-openssl-dev'
+when 'centos'
+  package 'libcurl'
+end
+
 package_url = "#{node.epipe.url}"
 base_package_filename = File.basename(package_url)
 cached_package_filename = "/tmp/#{base_package_filename}"
@@ -41,7 +49,7 @@ bash 'extract_epipe' do
         code <<-EOH
                 if [ ! -d #{node.epipe.dir} ] ; then
                    mkdir -p #{node.epipe.dir}
-                   chmod 755 #{node.epipe.dir} 
+                   chmod 755 #{node.epipe.dir}
                 fi
                 tar -xf #{cached_package_filename} -C #{node.epipe.dir}
                 chown -R #{node.epipe.user}:#{node.epipe.group} #{node.epipe.home}
@@ -55,7 +63,7 @@ end
 
 file node.epipe.base_dir do
   action :delete
-  force_unlink true  
+  force_unlink true
 end
 
 link node.epipe.base_dir do
