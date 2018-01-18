@@ -110,7 +110,7 @@ end
 
 if node['kagent']['enabled'] == "true" 
    kagent_config service_name do
-     service "HISTORY_SERVERS"
+     service "Hops"
      log_file "#{node['epipe']['base_dir']}/epipe.log"
    end
 end
