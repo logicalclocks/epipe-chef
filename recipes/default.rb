@@ -114,3 +114,12 @@ if node['kagent']['enabled'] == "true"
      log_file "#{node['epipe']['base_dir']}/epipe.log"
    end
 end
+
+
+if node['install']['upgrade'] == "true"
+  if node['services']['enabled'] == "true"
+  kagent_config "#{service_name}" do
+    action :systemd_reload
+  end
+  end
+end  
