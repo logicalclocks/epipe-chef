@@ -46,7 +46,6 @@ template"#{node['epipe']['base_dir']}/bin/reindex-epipe.sh" do
                :meta_database => "hopsworks",
                :elastic_addr => elastic,
             })
-  only_if { node['elastic']['projects']['reindex'] == "true" }
 end
 
 template"#{node['epipe']['base_dir']}/bin/stop-epipe.sh" do
@@ -62,6 +61,7 @@ bash 'reindex epipe' do
   code <<-EOF
      #{node['epipe']['base_dir']}/bin/reindex-epipe.sh
   EOF
+  only_if { node['elastic']['projects']['reindex'] }
 end
 
 
