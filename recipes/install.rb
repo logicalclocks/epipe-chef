@@ -23,10 +23,10 @@ end
 include_recipe "java"
 
 # ePipe requires libcurl.so.4
-case node['platform']
-when 'ubuntu'
+case node['platform_family']
+when 'debian'
   package 'libcurl4-openssl-dev'
-when 'centos'
+when 'rhel'
   package 'libcurl'
 end
 
