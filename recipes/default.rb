@@ -18,7 +18,7 @@ elastic = private_recipe_ip("elastic", "default") + ":#{node['elastic']['port']}
 #   owner node['epipe']['user']
 #   group node['epipe']['group']
 #   mode 0655
-#   variables({ 
+#   variables({
 #            })
 # end
 
@@ -85,7 +85,7 @@ if node['epipe']['systemd'] == "true"
 
   case node['platform_family']
   when "rhel"
-    systemd_script = "/usr/lib/systemd/system/#{service_name}.service" 
+    systemd_script = "/usr/lib/systemd/system/#{service_name}.service"
   when "debian"
     systemd_script = "/lib/systemd/system/#{service_name}.service"
   end
@@ -127,7 +127,7 @@ end
 end
 
 
-if node['kagent']['enabled'] == "true" 
+if node['kagent']['enabled'] == "true"
    kagent_config service_name do
      service "Hops"
      log_file "#{node['epipe']['base_dir']}/epipe.log"
