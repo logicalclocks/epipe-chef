@@ -58,6 +58,7 @@ end
 #when upgrading, we want to reindex the newly created projects index
 bash 'reindex epipe' do
   user node['epipe']['user']
+  timeout 7200
   code <<-EOF
      #{node['epipe']['base_dir']}/bin/reindex-epipe.sh
   EOF
