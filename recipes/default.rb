@@ -74,6 +74,10 @@ when "ubuntu"
 end
 
 
+deps = ""
+if exists_local("ndb", "mysqld") 
+  deps = "mysqld.service"
+end  
 service_name="epipe"
 
 if node['epipe']['systemd'] == "true"
@@ -96,6 +100,10 @@ if node['epipe']['systemd'] == "true"
     owner "root"
     group "root"
     mode 0754
+    variables({
+              :deps => deps
+              })
+    action :create    
 if node['services']['enabled'] == "true"
     notifies :enable, resources(:service => service_name)
 end
