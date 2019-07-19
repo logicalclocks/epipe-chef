@@ -1,0 +1,23 @@
+# ePipe Configurations
+
+reindex = true
+
+# general configuration
+
+connection = <%= @ndb_connectstring %>
+database = <%= @database %>
+meta_database = <%= @meta_database %>
+hive_meta_database = <%= @hivemeta_database %>
+poll_maxTimeToWait = 2000
+lru_cap = 10000
+
+# log level trace=0, debug=1, info=2, warn=3, error=4, fatal=5
+log_level = 2
+
+# ElasticSearch configuration
+
+elastic_addr = <%= @elastic_addr %>
+index = projects
+provenance_index = provenance
+elastic_batch = 20000
+ewait_time = 5000

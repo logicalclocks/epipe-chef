@@ -13,4 +13,4 @@ if [ -f $PID_FILE ] ; then
 fi
 
 
-<%= node['epipe']['base_dir'] %>/bin/epipe --reindex true --connection <%= @ndb_connectstring %> --database <%= @database %> --meta_database <%= @meta_database %> --elastic_addr <%= @elastic_addr %>  2>&1 > <%= node['epipe']['base_dir'] %>/epipe-reindex.log
+<%= node['epipe']['base_dir'] %>/bin/epipe -c <%= node['epipe']['base_dir'] %>/conf/config-reindex.ini  2>&1 > <%= node['epipe']['base_dir'] %>/epipe-reindex.log

@@ -6,34 +6,47 @@ nn = private_recipe_ip("hops", "nn") + ":#{node['hops']['nn']['port']}"
 elastic = private_recipe_ip("elastic", "default") + ":#{node['elastic']['port']}"
 
 
-
-# file "#{node['epipe']['base_dir']}/conf/epipe-site.xml" do
-#   action :delete
-# end
-
-# private_ip = my_private_ip()
-
-# template"#{node['epipe']['base_dir']}/conf/epipe-site.xml" do
-#   source "epipe-site.xml.erb"
-#   owner node['epipe']['user']
-#   group node['epipe']['group']
-#   mode 0655
-#   variables({
-#            })
-# end
-
 ndb_connectstring()
+
+file "#{node['epipe']['base_dir']}/conf/config.ini" do
+  action :delete
+end
+
+template"#{node['epipe']['base_dir']}/conf/config.ini" do
+   source "config.ini.erb"
+   owner node['epipe']['user']
+   group node['epipe']['group']
+   mode 0750
+   variables({:ndb_connectstring => node['ndb']['connectstring'],
+                :database => "hops",
+                :meta_database => "hopsworks",
+                :hivemeta_database => "metastore",
+                :elastic_addr => elastic,
+            })
+ end
+
+ file "#{node['epipe']['base_dir']}/conf/config-reindex.ini" do
+   action :delete
+ end
+
+ template"#{node['epipe']['base_dir']}/conf/config-reindex.ini" do
+    source "config-reindex.ini.erb"
+    owner node['epipe']['user']
+    group node['epipe']['group']
+    mode 0750
+    variables({:ndb_connectstring => node['ndb']['connectstring'],
+                 :database => "hops",
+                 :meta_database => "hopsworks",
+                 :hivemeta_database => "metastore",
+                 :elastic_addr => elastic,
+             })
+  end
 
 template"#{node['epipe']['base_dir']}/bin/start-epipe.sh" do
   source "start-epipe.sh.erb"
   owner node['epipe']['user']
   group node['epipe']['group']
   mode 0750
-  variables({ :ndb_connectstring => node['ndb']['connectstring'],
-               :database => "hops",
-               :meta_database => "hopsworks",
-               :elastic_addr => elastic,
-            })
 end
 
 template"#{node['epipe']['base_dir']}/bin/reindex-epipe.sh" do
@@ -41,11 +54,6 @@ template"#{node['epipe']['base_dir']}/bin/reindex-epipe.sh" do
   owner node['epipe']['user']
   group node['epipe']['group']
   mode 0750
-  variables({ :ndb_connectstring => node['ndb']['connectstring'],
-               :database => "hops",
-               :meta_database => "hopsworks",
-               :elastic_addr => elastic,
-            })
 end
 
 template"#{node['epipe']['base_dir']}/bin/stop-epipe.sh" do
@@ -75,9 +83,9 @@ end
 
 
 deps = ""
-if exists_local("ndb", "mysqld") 
+if exists_local("ndb", "mysqld")
   deps = "mysqld.service"
-end  
+end
 service_name="epipe"
 
 if node['epipe']['systemd'] == "true"
@@ -103,7 +111,7 @@ if node['epipe']['systemd'] == "true"
     variables({
               :deps => deps
               })
-    action :create    
+    action :create
 if node['services']['enabled'] == "true"
     notifies :enable, resources(:service => service_name)
 end

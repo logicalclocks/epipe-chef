@@ -13,5 +13,5 @@ if [ -f $PID_FILE ] ; then
 fi
 
 
-nohup <%= node['epipe']['base_dir'] %>/bin/epipe --connection <%= @ndb_connectstring %> --database <%= @database %> --meta_database <%= @meta_database %> --elastic_addr <%= @elastic_addr %> --fs_mutations_tu 1000 5 5 --schamebased_tu 1000 5 5 --schemaless_tu 1000 5 5 2>&1 > <%= node['epipe']['base_dir'] %>/epipe.log &
+nohup <%= node['epipe']['base_dir'] %>/bin/epipe -c <%= node['epipe']['base_dir'] %>/conf/config.ini 2>&1 > <%= node['epipe']['base_dir'] %>/epipe.log &
 echo $! > $PID_FILE
