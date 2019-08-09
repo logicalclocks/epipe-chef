@@ -55,3 +55,8 @@ attribute "install/dir",
 attribute "install/user",
           :description => "User to install the services as",
           :type => "string"
+
+attribute "epipe/metrics_port",
+          :description => "Port on which metrics are exposed",
+          :type => "string"
+

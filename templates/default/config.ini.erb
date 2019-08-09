@@ -53,4 +53,4 @@ ewait_time = 5000
 
 # Metrics Server
 stats = true
-metricsServer = 0.0.0.0:29191
+metricsServer = 0.0.0.0:<%= node['epipe']['metrics_port'] %>
