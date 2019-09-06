@@ -22,14 +22,6 @@ end
 
 include_recipe "java"
 
-# ePipe requires libcurl.so.4
-case node['platform_family']
-when 'debian'
-  package 'libcurl4-openssl-dev'
-when 'rhel'
-  package 'libcurl'
-end
-
 package_url = "#{node['epipe']['url']}"
 base_package_filename = File.basename(package_url)
 cached_package_filename = "#{Chef::Config['file_cache_path']}/#{base_package_filename}"
