@@ -2,6 +2,7 @@
 group node['epipe']['group'] do
   action :create
   not_if "getent group #{node['epipe']['group']}"
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 user node['epipe']['user'] do
@@ -11,12 +12,14 @@ user node['epipe']['user'] do
   shell "/bin/bash"
   manage_home true
   not_if "getent passwd #{node['epipe']['user']}"
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 group node['epipe']['group'] do
   action :modify
   members ["#{node['epipe']['user']}"]
   append true
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 
