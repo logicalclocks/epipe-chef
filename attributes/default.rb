@@ -4,7 +4,7 @@ include_attribute "ndb"
 include_attribute "elastic"
 include_attribute "elasticsearch"
 
-default['epipe']['version']                  = "0.11.0"
+default['epipe']['version']                  = "0.12.0"
 default['epipe']['user']                     = node['install']['user'].empty? ? node['hops']['hdfs']['user'] : node['install']['user']
 default['epipe']['group']                    = node['install']['user'].empty? ? node['hops']['group'] : node['install']['user']
 default['epipe']['url']                      = "#{node['download_url']}/epipe/#{node['platform_family']}/epipe-#{node['epipe']['version']}.tar.gz"
