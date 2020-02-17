@@ -12,6 +12,5 @@ if [ -f $PID_FILE ] ; then
  fi
 fi
 
-now=$(date +"%Y_%m_%d_%H_%M_%S_%3N")
-nohup <%= node['epipe']['base_dir'] %>/bin/epipe -c <%= node['epipe']['base_dir'] %>/conf/config.ini 2>&1 > <%= node['epipe']['base_dir'] %>/epipe_${now}.log &
+nohup <%= node['epipe']['base_dir'] %>/bin/epipe -c <%= node['epipe']['base_dir'] %>/conf/config.ini 2>&1 > <%= node['epipe']['base_dir'] %>/epipe.log &
 echo $! > $PID_FILE

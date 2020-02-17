@@ -13,6 +13,11 @@ lru_cap = 10000
 
 # log level trace=0, debug=1, info=2, warn=3, error=4, fatal=5
 log_level = 2
+# log rotation size in bytes
+log_rotation_size=<%=node['epipe']['log_rotation_size']%>
+log_dir=<%=node['epipe']['log_dir']%>
+# maximum number of log files to keep
+log_max_files=<%=node['epipe']['log_max_files']%>
 
 # ElasticSearch configuration
 
