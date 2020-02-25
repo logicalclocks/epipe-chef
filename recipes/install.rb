@@ -1,13 +1,14 @@
 
-group node['epipe']['group'] do
+group node['hops']['group'] do
+  gid node['hops']['group_id']
   action :create
-  not_if "getent group #{node['epipe']['group']}"
+  not_if "getent group #{node['hops']['group']}"
   not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 user node['epipe']['user'] do
   home "/home/#{node['epipe']['user']}"
-  gid node['epipe']['group']
+  gid node['hops']['group']
   action :create
   shell "/bin/bash"
   manage_home true
@@ -15,7 +16,7 @@ user node['epipe']['user'] do
   not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
-group node['epipe']['group'] do
+group node['hops']['group'] do
   action :modify
   members ["#{node['epipe']['user']}"]
   append true
@@ -47,7 +48,7 @@ bash 'extract_epipe' do
                    chmod 755 #{node['epipe']['dir']}
                 fi
                 tar -xf #{cached_package_filename} -C #{node['epipe']['dir']}
-                chown -R #{node['epipe']['user']}:#{node['epipe']['group']} #{node['epipe']['home']}
+                chown -R #{node['epipe']['user']}:#{node['hops']['group']} #{node['epipe']['home']}
                 chmod 750 #{node['epipe']['home']}
                 cd #{node['epipe']['home']}
                 touch #{epipe_downloaded}
@@ -63,6 +64,6 @@ end
 
 link node['epipe']['base_dir'] do
   owner node['epipe']['user']
-  group node['epipe']['group']
+  group node['hops']['group']
   to node['epipe']['home']
 end

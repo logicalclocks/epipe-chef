@@ -15,7 +15,7 @@ end
 template"#{node['epipe']['base_dir']}/conf/config.ini" do
    source "config.ini.erb"
    owner node['epipe']['user']
-   group node['epipe']['group']
+   group node['hops']['group']
    mode 0750
    variables({:ndb_connectstring => node['ndb']['connectstring'],
                 :database => "hops",
@@ -32,7 +32,7 @@ template"#{node['epipe']['base_dir']}/conf/config.ini" do
  template"#{node['epipe']['base_dir']}/conf/config-reindex.ini" do
     source "config-reindex.ini.erb"
     owner node['epipe']['user']
-    group node['epipe']['group']
+    group node['hops']['group']
     mode 0750
     variables({:ndb_connectstring => node['ndb']['connectstring'],
                  :database => "hops",
@@ -45,21 +45,21 @@ template"#{node['epipe']['base_dir']}/conf/config.ini" do
 template"#{node['epipe']['base_dir']}/bin/start-epipe.sh" do
   source "start-epipe.sh.erb"
   owner node['epipe']['user']
-  group node['epipe']['group']
+  group node['hops']['group']
   mode 0750
 end
 
 template"#{node['epipe']['base_dir']}/bin/reindex-epipe.sh" do
   source "reindex-epipe.sh.erb"
   owner node['epipe']['user']
-  group node['epipe']['group']
+  group node['hops']['group']
   mode 0750
 end
 
 template"#{node['epipe']['base_dir']}/bin/stop-epipe.sh" do
   source "stop-epipe.sh.erb"
   owner node['epipe']['user']
-  group node['epipe']['group']
+  group node['hops']['group']
   mode 0750
 end
 
@@ -133,7 +133,7 @@ else #sysv
   template "/etc/init.d/#{service_name}" do
     source "#{service_name}.erb"
     owner node['epipe']['user']
-    group node['epipe']['group']
+    group node['hops']['group']
     mode 0754
 if node['services']['enabled'] == "true"
     notifies :enable, resources(:service => service_name)
