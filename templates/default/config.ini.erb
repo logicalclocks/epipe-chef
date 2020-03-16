@@ -51,6 +51,7 @@ provenance_tu = 5
 
 elastic_addr = <%= @elastic_addr %>
 index = <%= node['elastic']['epipe']['search_index'] %>
+featurestore_index = <%= node['elastic']['epipe']['featurestore_index'] %>
 app_provenance_index = <%= node['elastic']['epipe']['app_provenance_index'] %>
 elastic_batch = 5000
 ewait_time = 5000
