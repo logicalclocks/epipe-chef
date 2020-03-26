@@ -12,6 +12,8 @@ file "#{node['epipe']['base_dir']}/conf/config.ini" do
   action :delete
 end
 
+crypto_dir = x509_helper.get_crypto_dir(node['epipe']['user'])
+hops_ca = "#{crypto_dir}/#{x509_helper.get_hops_ca_bundle_name()}"
 template"#{node['epipe']['base_dir']}/conf/config.ini" do
    source "config.ini.erb"
    owner node['epipe']['user']
@@ -22,6 +24,7 @@ template"#{node['epipe']['base_dir']}/conf/config.ini" do
                 :meta_database => "hopsworks",
                 :hivemeta_database => "metastore",
                 :elastic_addr => elastic,
+                :hops_ca => hops_ca
             })
  end
 
@@ -39,6 +42,7 @@ template"#{node['epipe']['base_dir']}/conf/config.ini" do
                  :meta_database => "hopsworks",
                  :hivemeta_database => "metastore",
                  :elastic_addr => elastic,
+                 :hops_ca => hops_ca
              })
   end
 

@@ -37,7 +37,7 @@ ewait_time = 5000
 
 <% if node['elastic']['opendistro_security']['enabled'].casecmp?("true") %>
 ssl_enabled = <%=node['elastic']['opendistro_security']['https']['enabled'].casecmp?("true") %>
-ca_path = <%=node['elastic']['opendistro_security']['ca'] %>
+ca_path = <%= @hops_ca %>
 username = <%=node['elastic']['opendistro_security']['epipe']['username'] %>
 password = <%=node['elastic']['opendistro_security']['epipe']['password'] %>
 <% end %>
