@@ -11,10 +11,8 @@ source_url       "https://github.com/hopshadoop/epipe-chef"
   supports os
 end
 
-depends 'java'
-depends 'ndb'
-depends 'hops'
-depends 'elastic'
+depends 'java', '~> 7.0.0'
+depends 'ulimit2', '~> 0.2.0'
 
 recipe "epipe::install", "Installs Epipe Server"
 recipe "epipe::default", "configures Epipe Server"
