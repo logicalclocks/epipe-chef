@@ -13,6 +13,11 @@ end
 
 depends 'java', '~> 7.0.0'
 depends 'ulimit2', '~> 0.2.0'
+depends 'kagent'
+depends 'hops'
+depends 'ndb'
+depends 'elastic'
+
 
 recipe "epipe::install", "Installs Epipe Server"
 recipe "epipe::default", "configures Epipe Server"
