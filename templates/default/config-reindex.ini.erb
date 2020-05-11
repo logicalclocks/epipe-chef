@@ -1,6 +1,13 @@
 # ePipe Configurations
 
 reindex = true
+<% if node['elastic']['projects']['reindex'].casecmp?("true") && node['elastic']['featurestore']['reindex'].casecmp?("true") %>
+reindex_of = all
+<% elsif node['elastic']['projects']['reindex'].casecmp?("true") %>
+reindex_of = project
+<% elsif node['elastic']['featurestore']['reindex'].casecmp?("true") %>
+reindex_of = featurestore
+<% end %>
 
 # general configuration
 

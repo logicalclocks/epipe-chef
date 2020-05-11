@@ -70,7 +70,7 @@ bash 'reindex epipe' do
   code <<-EOF
      #{node['epipe']['base_dir']}/bin/reindex-epipe.sh
   EOF
-  only_if { node['elastic']['projects']['reindex'] == "true"}
+  only_if { node['elastic']['projects']['reindex'] == "true" || node['elastic']['featurestore']['reindex'] == "true" }
 end
 
 
