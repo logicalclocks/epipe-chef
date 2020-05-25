@@ -67,3 +67,11 @@ link node['epipe']['base_dir'] do
   group node['hops']['group']
   to node['epipe']['home']
 end
+
+if service_discovery_enabled()
+  # Register epipe with Consul
+  consul_service "Registering NameNode with Consul" do
+    service_definition "epipe-consul.hcl.erb"
+    action :register
+  end
+end

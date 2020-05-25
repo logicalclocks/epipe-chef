@@ -1,0 +1,16 @@
+service {
+    id = "epipe/monitoring"
+    name = "epipe"
+    tags = [
+        "monitoring"
+    ]
+    port = <%= node['epipe']['metrics_port'] %> 
+    check = {
+        id = "epipe-check"
+        name = "Health check for epipe"
+        http = "http://localhost:<%= node['epipe']['metrics_port'] %>/metrics"
+        interval = "20s"
+        timeout = "20s"
+        status = "passing"
+    }
+}
