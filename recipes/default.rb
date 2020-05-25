@@ -150,3 +150,12 @@ if node['kagent']['enabled'] == "true"
      log_file "#{node['epipe']['base_dir']}/epipe.log"
    end
 end
+
+
+if service_discovery_enabled()
+  # Register epipe with Consul
+  consul_service "Registering ePipe with Consul" do
+    service_definition "epipe-consul.hcl.erb"
+    action :register
+  end
+end
