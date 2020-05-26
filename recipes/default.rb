@@ -1,6 +1,7 @@
 nmy_ip = my_private_ip()
 my_public_ip = my_public_ip()
 
+Chef::Recipe.send(:include, Hops::Helpers)
 
 nn = private_recipe_ip("hops", "nn") + ":#{node['hops']['nn']['port']}"
 elastic = all_elastic_ips_ports_str()
@@ -143,14 +144,12 @@ end
 
 end
 
-
 if node['kagent']['enabled'] == "true"
    kagent_config service_name do
      service "Hops"
      log_file "#{node['epipe']['base_dir']}/epipe.log"
    end
 end
-
 
 if service_discovery_enabled()
   # Register epipe with Consul
