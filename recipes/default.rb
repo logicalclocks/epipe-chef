@@ -1,8 +1,6 @@
 nmy_ip = my_private_ip()
 my_public_ip = my_public_ip()
 
-Chef::Recipe.send(:include, Hops::Helpers)
-
 nn = private_recipe_ip("hops", "nn") + ":#{node['hops']['nn']['port']}"
 elastic = all_elastic_ips_ports_str()
 
