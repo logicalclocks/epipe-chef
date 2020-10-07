@@ -1,6 +1,8 @@
 [Unit]
 Description = ePipe Server
 After = syslog.target network.target remote-fs.target <%= @deps %>
+StartLimitIntervalSec=30
+StartLimitBurst=20
 
 [Service]
 User = <%= node['epipe']['user'] %>
@@ -9,6 +11,8 @@ PIDFile = <%= node['epipe']['pid_file'] %>
 ExecStart = <%= node['epipe']['base_dir'] %>/bin/start-epipe.sh
 ExecStop = <%= node['epipe']['base_dir'] %>/bin/stop-epipe.sh
 LimitNOFILE = 20000
+Restart=on-failure
+RestartSec=5
 
 Type = forking
 
