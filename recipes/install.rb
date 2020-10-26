@@ -33,6 +33,14 @@ end
 
 include_recipe "java"
 
+if node['platform_family'].eql?("rhel") && node['rhel']['epel'].downcase == "true"
+  package "epel-release"
+end
+
+if node['platform_family'].eql?("rhel")
+  package "openssl11"
+end
+
 package_url = "#{node['epipe']['url']}"
 base_package_filename = File.basename(package_url)
 cached_package_filename = "#{Chef::Config['file_cache_path']}/#{base_package_filename}"
