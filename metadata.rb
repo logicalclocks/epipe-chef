@@ -11,12 +11,12 @@ source_url       "https://github.com/hopshadoop/epipe-chef"
   supports os
 end
 
-depends 'java', '~> 7.0.0'
 depends 'ulimit2', '~> 0.2.0'
 depends 'kagent'
 depends 'hops'
 depends 'ndb'
 depends 'elastic'
+depends 'java'
 
 
 recipe "epipe::install", "Installs Epipe Server"
