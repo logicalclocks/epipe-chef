@@ -12,6 +12,11 @@ default['epipe']['systemd']                  = "true"
 default['epipe']['dir']                      = node['install']['dir'].empty? ? "/srv" : node['install']['dir']
 default['epipe']['home']                     = node['epipe']['dir'] + "/epipe-" + "#{node['epipe']['version']}"
 default['epipe']['base_dir']                 = "#{node['epipe']['dir']}/epipe"
+
+# Data volume directories
+default['epipe']['data_volume']['root_dir']  = "#{node['data']['dir']}/epipe"
+default['epipe']['data_volume']['log_dir']   = "#{node['epipe']['data_volume']['root_dir']}/logs"
+
 default['epipe']['pid_file']                 = "/tmp/epipe.pid"
 default['epipe']['log_dir']                  = "#{node['epipe']['base_dir']}/logs"
 default['epipe']['log_rotation_size']        = "67108864"
