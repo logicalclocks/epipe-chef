@@ -91,11 +91,16 @@ directory node['data']['dir'] do
   not_if { ::File.directory?(node['data']['dir']) }
 end
 
+directory node['epipe']['data_volume']['root_dir'] do
+  owner node['epipe']['user']
+  group node['hops']['group']
+  mode '0750'
+end
+
 directory node['epipe']['data_volume']['log_dir'] do
   owner node['epipe']['user']
   group node['hops']['group']
   mode '0750'
-  recursive true
 end
 
 bash 'Move epipe logs to data volume' do
