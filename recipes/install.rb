@@ -82,3 +82,42 @@ link node['epipe']['base_dir'] do
   group node['hops']['group']
   to node['epipe']['home']
 end
+
+directory node['data']['dir'] do
+  owner 'root'
+  group 'root'
+  mode '0775'
+  action :create
+  not_if { ::File.directory?(node['data']['dir']) }
+end
+
+directory node['epipe']['data_volume']['root_dir'] do
+  owner node['epipe']['user']
+  group node['hops']['group']
+  mode '0750'
+end
+
+directory node['epipe']['data_volume']['log_dir'] do
+  owner node['epipe']['user']
+  group node['hops']['group']
+  mode '0750'
+end
+
+bash 'Move epipe logs to data volume' do
+  user 'root'
+  code <<-EOH
+    set -e
+    mv -f #{node['epipe']['log_dir']}/* #{node['epipe']['data_volume']['log_dir']}
+    rm -rf #{node['epipe']['log_dir']}
+  EOH
+  only_if { conda_helpers.is_upgrade }
+  only_if { File.directory?(node['epipe']['log_dir'])}
+  not_if { File.symlink?(node['epipe']['log_dir'])}
+end
+
+link node['epipe']['log_dir'] do
+  owner node['epipe']['user']
+  group node['hops']['group']
+  mode '0750'
+  to node['epipe']['data_volume']['log_dir']
+end
