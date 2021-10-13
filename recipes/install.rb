@@ -38,7 +38,7 @@ if node['platform_family'].eql?("rhel") && node['rhel']['epel'].downcase == "tru
 end
 
 if node['platform_family'].eql?("rhel")
-  package "openssl11"
+  package "openssl"
 end
 
 package_url = "#{node['epipe']['url']}"
