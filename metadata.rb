@@ -4,7 +4,7 @@ name             "epipe"
 license          "Apache v2.0"
 description      "Installs/Configures a HopsFS to ElasticSearch connector"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "2.4.0"
+version          "2.5.0"
 source_url       "https://github.com/hopshadoop/epipe-chef"
 
 %w{ ubuntu debian centos }.each do |os|
