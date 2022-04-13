@@ -54,11 +54,11 @@ app_provenance_index = <%= node['elastic']['epipe']['app_provenance_index'] %>
 elastic_batch = 5000
 ewait_time = 5000
 
-<% if node['elastic']['opendistro_security']['enabled'].casecmp?("true") %>
-ssl_enabled = <%=node['elastic']['opendistro_security']['https']['enabled'].casecmp?("true") %>
+<% if node['elastic']['opensearch_security']['enabled'].casecmp?("true") %>
+ssl_enabled = <%=node['elastic']['opensearch_security']['https']['enabled'].casecmp?("true") %>
 ca_path = <%= @hops_ca %>
-username = <%=node['elastic']['opendistro_security']['epipe']['username'] %>
-password = <%=node['elastic']['opendistro_security']['epipe']['password'] %>
+username = <%=node['elastic']['opensearch_security']['epipe']['username'] %>
+password = <%=node['elastic']['opensearch_security']['epipe']['password'] %>
 <% end %>
 
 # Metrics Server

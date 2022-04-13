@@ -1,7 +1,7 @@
 dependencies: 
   - recipe: epipe::install
     global:  
-      - hopsworks::default
+      - hops::install
       - elastic::install
   - recipe: epipe::default
     global:  

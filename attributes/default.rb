@@ -2,7 +2,6 @@ include_attribute "kagent"
 include_attribute "hops"
 include_attribute "ndb"
 include_attribute "elastic"
-include_attribute "elasticsearch"
 
 default['epipe']['version']                  = "0.16.0"
 default['epipe']['user']                     = node['install']['user'].empty? ? node['hops']['hdfs']['user'] : node['install']['user']

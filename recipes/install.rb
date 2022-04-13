@@ -9,6 +9,7 @@ end
 user node['epipe']['user'] do
   home "/home/#{node['epipe']['user']}"
   gid node['hops']['group']
+  uid node['hops']['hdfs']['user_id']
   action :create
   shell "/bin/bash"
   manage_home true
