@@ -2,9 +2,8 @@ include_attribute "kagent"
 include_attribute "hops"
 include_attribute "ndb"
 include_attribute "elastic"
-include_attribute "elasticsearch"
 
-default['epipe']['version']                  = "0.16.0"
+default['epipe']['version']                  = "0.17.0"
 default['epipe']['user']                     = node['install']['user'].empty? ? node['hops']['hdfs']['user'] : node['install']['user']
 default['epipe']['user-home']                = "/home/#{node['epipe']['user']}"
 default['epipe']['url']                      = "#{node['download_url']}/epipe/#{node['platform_family']}/epipe-#{node['epipe']['version']}.tar.gz"
