@@ -42,9 +42,9 @@ if node['platform_family'].eql?("rhel")
   end
 
   if node['platform_version'].start_with?("8")
-    rhel_package.append("openssl")
+    rhel_packages.append("openssl")
   else
-    rhel_package.append("openssl11")
+    rhel_packages.append("openssl11")
   end
 
   package rhel_packages
