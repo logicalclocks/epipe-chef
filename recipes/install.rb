@@ -34,12 +34,20 @@ end
 
 include_recipe "java"
 
-if node['platform_family'].eql?("rhel") && node['rhel']['epel'].downcase == "true"
-  package "epel-release"
-end
-
 if node['platform_family'].eql?("rhel")
-  package "openssl11"
+  rhel_packages = []
+
+  if node['rhel']['epel'].downcase == "true"
+    rhel_packages.append("epel-release")
+  end
+
+  if node['platform_version'].start_with?("8")
+    rhel_packages.append("openssl")
+  else
+    rhel_packages.append("openssl11")
+  end
+
+  package rhel_packages
 end
 
 package_url = "#{node['epipe']['url']}"
