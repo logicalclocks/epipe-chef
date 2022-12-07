@@ -36,13 +36,22 @@ include_recipe "java"
 
 if node['platform_family'].eql?("rhel")
   if node['rhel']['epel'].downcase == "true"
-    package "epel-release"
+    package "epel-release" do
+      retries 10
+      retry_delay 30
+    end
   end
 
   if node['platform_version'].start_with?("8")
-    package "openssl"
+    package "openssl" do
+      retries 10
+      retry_delay 30
+    end
   else
-    package "openssl11"
+    package "openssl11" do
+      retries 10
+      retry_delay 30
+    end
   end
 end
 
