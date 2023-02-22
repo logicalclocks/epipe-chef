@@ -55,6 +55,24 @@ if node['platform_family'].eql?("rhel")
   end
 end
 
+if node['platform_family'].eql?("debian")
+  libssl1_1 = "libssl1.1_1.1.1f-1ubuntu2_amd64.deb"
+  # will change the source link to repo.hops.works
+  remote_file libssl1_1 do
+    source "http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb"
+    owner "root"
+    mode "0644"
+    action :create_if_missing
+  end
+  bash 'libssl1_1' do
+    user "root"
+    code <<-EOH
+      dpkg -i #{libssl1_1}
+    EOH
+  end
+
+end
+
 package_url = "#{node['epipe']['url']}"
 base_package_filename = File.basename(package_url)
 cached_package_filename = "#{Chef::Config['file_cache_path']}/#{base_package_filename}"
