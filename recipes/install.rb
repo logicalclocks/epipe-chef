@@ -77,6 +77,8 @@ bash 'extract_epipe' do
                    chmod 755 #{node['epipe']['dir']}
                 fi
                 tar -xf #{cached_package_filename} -C #{node['epipe']['dir']}
+                # for testing
+                mv /srv/hops/epipe-0.18.0 #{node['epipe']['home']}
                 chown -R #{node['epipe']['user']}:#{node['hops']['group']} #{node['epipe']['home']}
                 chmod 750 #{node['epipe']['home']}
                 cd #{node['epipe']['home']}
