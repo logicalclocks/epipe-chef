@@ -4,10 +4,10 @@ include_attribute "ndb"
 include_attribute "elastic"
 
 
-default['epipe']['version']                  = "0.18.0-pr-149"
+default['epipe']['version']                  = "0.18.0"
 default['epipe']['user']                     = node['install']['user'].empty? ? node['hops']['hdfs']['user'] : node['install']['user']
 default['epipe']['user-home']                = "/home/#{node['epipe']['user']}"
-default['epipe']['url']                      = "#{node['download_url']}/epipe/test/#{node['platform_family']}/epipe-#{node['epipe']['version']}.tar.gz"
+default['epipe']['url']                      = "#{node['download_url']}/epipe/#{node['platform_family']}/epipe-#{node['epipe']['version']}.tar.gz"
 default['epipe']['systemd']                  = "true"
 default['epipe']['dir']                      = node['install']['dir'].empty? ? "/srv" : node['install']['dir']
 default['epipe']['home']                     = node['epipe']['dir'] + "/epipe-" + "#{node['epipe']['version']}"
