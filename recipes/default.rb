@@ -66,6 +66,15 @@ template"#{node['epipe']['base_dir']}/bin/stop-epipe.sh" do
   mode 0750
 end
 
+service_name="epipe"
+
+# In upgrades we need to stop epipe before run the reindex
+# In fresh installations the resource does not fail if the systemd unit does not exist
+systemd_unit "#{service_name}.service" do
+  action :stop
+  only_if { node['elastic']['projects']['reindex'] == "true" || node['elastic']['featurestore']['reindex'] == "true" }
+end
+
 #when upgrading, we want to reindex the newly created projects index
 bash 'reindex epipe' do
   user node['epipe']['user']
@@ -89,7 +98,6 @@ deps = ""
 if exists_local("ndb", "mysqld")
   deps = "mysqld.service"
 end
-service_name="epipe"
 
 if node['epipe']['systemd'] == "true"
 
