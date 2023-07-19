@@ -11,7 +11,6 @@ source_url       "https://github.com/hopshadoop/epipe-chef"
   supports os
 end
 
-depends 'ulimit2', '~> 0.2.0'
 depends 'kagent'
 depends 'hops'
 depends 'ndb'
