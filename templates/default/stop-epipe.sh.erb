@@ -1,9 +1,6 @@
 #!/bin/bash
 
-
-
-#PID_FILE=<%= node['epipe']['base_dir'] %>/epipe.pid
-PID_FILE=/tmp/epipe.pid
+PID_FILE=<%= node['epipe']['pid_file'] %>
 
 function kill_named {
      PID=`ps aux | grep -i epipe | grep -v karamel | grep -v chef | grep -v grep | awk '{print $2}'`
