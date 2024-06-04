@@ -10,8 +10,6 @@ meta_database = <%= @meta_database %>
 hive_meta_database = <%= @hivemeta_database %>
 poll_maxTimeToWait = 2000
 lru_cap = 10000
-prov_file_lru_cap = 10000
-prov_core_lru_cap = 100
 recovery = true
 
 # log level trace=0, debug=1, info=2, warn=3, error=4, fatal=5
@@ -41,15 +39,10 @@ fs_mutations_tu = 1000
 fs_mutations_tu = 5
 fs_mutations_tu = 5
 
-provenance_tu = 1000
-provenance_tu = 5
-provenance_tu = 5
-
 # ElasticSearch configuration
 
 elastic_addr = <%= @elastic_addr %>
 index = <%= node['elastic']['epipe']['search_index'] %>
-app_provenance_index = <%= node['elastic']['epipe']['app_provenance_index'] %>
 elastic_batch = 5000
 ewait_time = 5000
 

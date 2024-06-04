@@ -5,8 +5,6 @@ reindex = true
 reindex_of = all
 <% elsif node['elastic']['projects']['reindex'].casecmp?("true") %>
 reindex_of = project
-<% elsif node['elastic']['featurestore']['reindex'].casecmp?("true") %>
-reindex_of = featurestore
 <% end %>
 
 # general configuration
@@ -17,9 +15,6 @@ meta_database = <%= @meta_database %>
 hive_meta_database = <%= @hivemeta_database %>
 poll_maxTimeToWait = 2000
 lru_cap = 10000
-prov_file_lru_cap = 10000
-# the prov core is a json object - keep this cache a bit smaller
-prov_core_lru_cap = 100
 
 # log level trace=0, debug=1, info=2, warn=3, error=4, fatal=5
 log_level = 2
@@ -33,7 +28,6 @@ log_max_files=<%=node['epipe']['log_max_files']%>
 
 elastic_addr = <%= @elastic_addr %>
 index = projects
-app_provenance_index = appprovenance
 elastic_batch = 20000
 ewait_time = 5000
 
